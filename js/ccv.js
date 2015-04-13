@@ -125,7 +125,14 @@ var ccv = module.exports = exports = {
     var scale = Math.pow(2, 1 / (interval + 1));
     var next = interval + 1;
     var scale_upto = Math.floor(Math.log(Math.min(cascade.width, cascade.height)) / Math.log(scale));
-    var pyr = new Array((scale_upto + next * 2) * 4);
+    var pyr_length = (scale_upto + next * 2) * 4;
+    var pyr;
+    if (pyr_length > 0) {
+      pyr = new Array(pyr_length);
+    } else {
+      pyr = new Array(next * 8);
+    }
+
     pyr[0] = canvas;
     pyr[0].data = pyr[0].getContext("2d").getImageData(0, 0, pyr[0].width, pyr[0].height).data;
     var i, j, k, x, y, q;
